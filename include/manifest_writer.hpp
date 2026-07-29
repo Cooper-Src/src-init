@@ -10,7 +10,7 @@ namespace srcinit
     {
     public:
         bool write(
-            const PackageManifest& manifest,
-            const std::filesystem::path& path);
+            const PackageManifest &manifest,
+            const std::filesystem::path &path);
     };
 }

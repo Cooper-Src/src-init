@@ -22,7 +22,7 @@ namespace srcinit
         out << "[source]\n";
         out << "type = " << manifest.source.type << '\n';
         out << "url = " << manifest.source.url << '\n';
-        out << "branch = " << manifest.source.branch << "\n\n";
+        out << "format = " << manifest.source.format << "\n\n";
 
         out << "[license]\n";
         out << "name = " << manifest.license.name << "\n\n";

@@ -15,6 +15,7 @@ add_executable(src-init
     src/github_provider.cpp
     src/manifest_generator.cpp
     src/manifest_writer.cpp
+    src/paths.cpp
 )
 
 target_include_directories(src-init PRIVATE

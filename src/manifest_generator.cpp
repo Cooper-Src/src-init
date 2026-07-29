@@ -11,9 +11,31 @@ namespace srcinit
         manifest.version = metadata.version;
         manifest.description = metadata.description;
 
-        manifest.source.type = "git";
-        manifest.source.url = metadata.sourceUrl;
-        manifest.source.branch = metadata.defaultBranch;
+        manifest.source.type = "archive";
+manifest.source.format = "zip";
+
+if (!metadata.defaultTag.empty())
+{
+    manifest.source.url =
+        "https://github.com/" +
+        metadata.owner +
+        "/" +
+        metadata.repository +
+        "/archive/refs/tags/" +
+        metadata.defaultTag +
+        ".zip";
+}
+else
+{
+    manifest.source.url =
+        "https://github.com/" +
+        metadata.owner +
+        "/" +
+        metadata.repository +
+        "/archive/refs/heads/" +
+        metadata.defaultBranch +
+        ".zip";
+}
 
         manifest.license.name = metadata.license;
 

@@ -19,6 +19,9 @@
     <ClCompile Include="C:\src-init\src\manifest_writer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\src-init\src\paths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\src-init\CMakeLists.txt" />

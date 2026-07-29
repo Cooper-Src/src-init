@@ -4,6 +4,7 @@
 #include "github_provider.hpp"
 #include "manifest_generator.hpp"
 #include "manifest_writer.hpp"
+#include "paths.hpp"
 
 #include <iostream>
 
@@ -69,7 +70,8 @@ namespace srcinit
 
         writer.write(
             manifest,
-            "raylib.src");
+            srcinit::Paths::registryDirectory() /
+                (manifest.name + ".src"));
         return 0;
     }
 
@@ -91,13 +93,17 @@ namespace srcinit
         PackageManifest manifest =
             generator.generate(repo);
 
+        auto output =
+            srcinit::Paths::registryDirectory() /
+            (manifest.name + ".src");
+
         writer.write(
             manifest,
-            manifest.name + ".src");
+            output);
 
         std::cout << "Created "
-                  << manifest.name
-                  << ".src\n";
+                  << output.make_preferred()
+                  << '\n';
 
         return 0;
     }

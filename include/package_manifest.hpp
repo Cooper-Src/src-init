@@ -5,11 +5,11 @@
 namespace srcinit
 {
     struct Source
-    {
-        std::string type;
-        std::string url;
-        std::string branch;
-    };
+{
+    std::string type;
+    std::string url;
+    std::string format;
+};
 
     struct License
     {

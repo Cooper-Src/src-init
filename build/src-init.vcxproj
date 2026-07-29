@@ -428,6 +428,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\src-init\src\github_provider.cpp" />
     <ClCompile Include="C:\src-init\src\manifest_generator.cpp" />
     <ClCompile Include="C:\src-init\src\manifest_writer.cpp" />
+    <ClCompile Include="C:\src-init\src\paths.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

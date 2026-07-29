@@ -41,57 +41,68 @@ namespace srcinit
     }
 
     RepositoryMetadata GitHubProvider::fetch(
-    const std::string& repositoryUrl)
-{
-    std::string owner;
-    std::string repo;
-
-    if (!parseRepositoryUrl(repositoryUrl, owner, repo))
+        const std::string &repositoryUrl)
     {
-        throw std::runtime_error("Invalid GitHub repository URL.");
+        std::string owner;
+        std::string repo;
+
+        if (!parseRepositoryUrl(repositoryUrl, owner, repo))
+        {
+            throw std::runtime_error("Invalid GitHub repository URL.");
+        }
+
+        RepositoryMetadata metadata =
+            fetchRepository(owner, repo);
+
+         metadata.owner = owner;
+        metadata.repository = repo;
+        
+            metadata.version =
+            fetchLatestVersion(owner, repo);
+
+        metadata.defaultTag =
+            metadata.version;
+
+        // metadata.defaultCommit =
+        //     fetchCommitForTag(
+        //         owner,
+        //         repo,
+        //         metadata.defaultTag);
+        return metadata;
     }
 
-    RepositoryMetadata metadata =
-        fetchRepository(owner, repo);
-
-    metadata.version =
-        fetchLatestVersion(owner, repo);
-
-    return metadata;
-}
-    
-std::string GitHubProvider::fetchLatestVersion(
-    const std::string& owner,
-    const std::string& repo)
-{
-    HttpClient client;
-
-    std::string json =
-        client.get(
-            "https://api.github.com/repos/" +
-            owner + "/" +
-            repo +
-            "/releases/latest");
-
-    cJSON* root =
-        cJSON_Parse(json.c_str());
-
-    if (!root)
-        return "unknown";
-
-    std::string version = "unknown";
-
-    if (auto* tag =
-            cJSON_GetObjectItem(root, "tag_name");
-        cJSON_IsString(tag))
+    std::string GitHubProvider::fetchLatestVersion(
+        const std::string &owner,
+        const std::string &repo)
     {
-        version = tag->valuestring;
+        HttpClient client;
+
+        std::string json =
+            client.get(
+                "https://api.github.com/repos/" +
+                owner + "/" +
+                repo +
+                "/releases/latest");
+
+        cJSON *root =
+            cJSON_Parse(json.c_str());
+
+        if (!root)
+            return "unknown";
+
+        std::string version = "unknown";
+
+        if (auto *tag =
+                cJSON_GetObjectItem(root, "tag_name");
+            cJSON_IsString(tag))
+        {
+            version = tag->valuestring;
+        }
+
+        cJSON_Delete(root);
+
+        return version;
     }
-
-    cJSON_Delete(root);
-
-    return version;
-}
 
     RepositoryMetadata GitHubProvider::fetchRepository(
         const std::string &owner,
@@ -104,39 +115,42 @@ std::string GitHubProvider::fetchLatestVersion(
                 "https://api.github.com/repos/" +
                 owner + "/" + repo);
 
-        cJSON *root =
-            cJSON_Parse(json.c_str());
+        cJSON *root = cJSON_Parse(json.c_str());
 
         if (!root)
-            throw std::runtime_error("Failed to parse repository JSON.");
+            throw std::runtime_error("Failed to parse JSON.");
 
         RepositoryMetadata metadata;
 
+        // name
         if (auto *item = cJSON_GetObjectItem(root, "name");
             cJSON_IsString(item))
             metadata.name = item->valuestring;
 
+        // description
         if (auto *item = cJSON_GetObjectItem(root, "description");
             cJSON_IsString(item))
             metadata.description = item->valuestring;
 
-        if (auto *item = cJSON_GetObjectItem(root, "homepage");
+        // clone_url
+        if (auto *item = cJSON_GetObjectItem(root, "clone_url");
             cJSON_IsString(item))
-            metadata.homepage = item->valuestring;
+            metadata.cloneUrl = item->valuestring;
 
-        if (auto *item = cJSON_GetObjectItem(root, "html_url");
-            cJSON_IsString(item))
-            metadata.sourceUrl = item->valuestring;
-
+        // default_branch
         if (auto *item = cJSON_GetObjectItem(root, "default_branch");
             cJSON_IsString(item))
             metadata.defaultBranch = item->valuestring;
 
-        if (auto *license =
-                cJSON_GetObjectItem(root, "license"))
+        // homepage
+        if (auto *item = cJSON_GetObjectItem(root, "homepage");
+            cJSON_IsString(item))
+            metadata.homepage = item->valuestring;
+
+        // license.spdx_id
+        if (auto *license = cJSON_GetObjectItem(root, "license"))
         {
-            if (auto *spdx =
-                    cJSON_GetObjectItem(license, "spdx_id");
+            if (auto *spdx = cJSON_GetObjectItem(license, "spdx_id");
                 cJSON_IsString(spdx))
             {
                 metadata.license = spdx->valuestring;
@@ -147,5 +161,4 @@ std::string GitHubProvider::fetchLatestVersion(
 
         return metadata;
     }
-
 }
