@@ -2,5 +2,5 @@
 
 namespace srcinit
 {
-    inline constexpr const char* Version = "0.1.0";
+    inline constexpr const char* Version = "0.3.0";
 }

@@ -53,12 +53,12 @@ namespace srcinit
             << "src-init " << Version << "\n\n"
             << "Usage:\n"
             << "  src-init create <repository>\n"
-            << "  src-init validate <manifest>\n"
-            << "  src-init format <manifest>\n"
-            << "  src-init update <manifest>\n"
             << "  src-init version\n"
-            << "  src-init help\n";
-
+             << " src-init registry build\n"
+             << " src-init auth login\n"
+             << " src-init auth status\n"
+             << " src-init auth logout\n"
+             << " src-init help\n";
         return 0;
     }
 
