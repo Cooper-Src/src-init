@@ -429,6 +429,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\src-init\src\manifest_generator.cpp" />
     <ClCompile Include="C:\src-init\src\manifest_writer.cpp" />
     <ClCompile Include="C:\src-init\src\paths.cpp" />
+    <ClCompile Include="C:\src-init\src\config.cpp" />
+    <ClCompile Include="C:\src-init\src\registry_builder.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

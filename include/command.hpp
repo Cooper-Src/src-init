@@ -12,8 +12,11 @@ namespace srcinit
 
     private:
     int create(const std::vector<std::string>& arguments);
+    int auth(const std::vector<std::string>& arguments);
+    int registry(const std::vector<std::string>& arguments);
         int help();
         int version();
+        
     
     };
 }

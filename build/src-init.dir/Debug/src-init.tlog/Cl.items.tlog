@@ -5,3 +5,5 @@ C:\src-init\src\github_provider.cpp;C:\src-init\build\src-init.dir\Debug\github_
 C:\src-init\src\manifest_generator.cpp;C:\src-init\build\src-init.dir\Debug\manifest_generator.obj
 C:\src-init\src\manifest_writer.cpp;C:\src-init\build\src-init.dir\Debug\manifest_writer.obj
 C:\src-init\src\paths.cpp;C:\src-init\build\src-init.dir\Debug\paths.obj
+C:\src-init\src\config.cpp;C:\src-init\build\src-init.dir\Debug\config.obj
+C:\src-init\src\registry_builder.cpp;C:\src-init\build\src-init.dir\Debug\registry_builder.obj

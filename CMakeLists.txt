@@ -16,6 +16,8 @@ add_executable(src-init
     src/manifest_generator.cpp
     src/manifest_writer.cpp
     src/paths.cpp
+    src/config.cpp
+    src/registry_builder.cpp
 )
 
 target_include_directories(src-init PRIVATE

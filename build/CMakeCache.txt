@@ -256,6 +256,9 @@ _VCPKG_INSTALLED_DIR:PATH=C:/vcpkg/installed
 //The directory containing a CMake configuration file for cJSON.
 cJSON_DIR:PATH=C:/vcpkg/installed/arm64-windows/share/cjson
 
+//The directory containing a CMake configuration file for nlohmann_json.
+nlohmann_json_DIR:PATH=nlohmann_json_DIR-NOTFOUND
+
 //Value Computed by CMake
 src-init_BINARY_DIR:STATIC=C:/src-init/build
 
